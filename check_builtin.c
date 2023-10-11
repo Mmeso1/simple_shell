@@ -1,7 +1,6 @@
 #include "shell.h"
 
-const char *builtin_commands[] =
-{
+const char *builtin_commands[] = {
 	"cd",
 	"alias",
 	"setenv",
@@ -24,7 +23,6 @@ int is_builtin_command(const char *cmd)
 	{
 		if (strcmp(cmd, builtin_commands[i]) == 0)
 		{
-			printf("Yas!! IT is a built_in function\n");
 			return (1);
 		}
 		i++;

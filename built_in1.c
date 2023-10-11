@@ -8,27 +8,24 @@ void handle_exit(char **args)
 {
 	int status;
 
-	if (args == NULL)
+	if (args == NULL || args[0] == NULL)
+	{
 		exit(EXIT_SUCCESS);
-	else if (args[0] != NULL)
+	}
+
+	if (args[0] != NULL)
 	{
 		status = atoi(args[0]);
-		if (status < 0)
-		{
-			perror("illegal number");
-			exit(2);
-		}
-		else if (status != 0 || (status == 0 && args[0][0] == '0'))
+		if (status > 0 || (status == 0 && args[0][0] == '0'))
 		{
 			exit(status);
 		}
 		else
 		{
-			perror("illegal number");
+			perror(SHELL_NAME);
 			exit(2);
 		}
 	}
-
 }
 
 /**
@@ -36,10 +33,10 @@ void handle_exit(char **args)
  * @args: the args array
  * Return: ...
  */
-extern char **environ;
-void handle_env()
+void handle_env(char **args)
 {
 	char **env = environ;
+	(void)args;
 
 	while (*env)
 	{
@@ -56,12 +53,11 @@ void handle_env()
  */
 void handle_setenv(char **args)
 {
-	char *error_message;
+	if (args == NULL || args[0] == NULL || args[1] == NULL)
+		return;
 
-	if (args[1] == NULL || args[2] == NULL)
+	if (setenv(args[0], args[1], 1) == -1)
 	{
-		error_message = "Usage: setenv VARIABLE VALUE\n";
-		write(STDERR_FILENO, error_message, strlen(error_message));
 		return;
 	}
 }
@@ -73,15 +69,11 @@ void handle_setenv(char **args)
  */
 void handle_unsetenv(char **args)
 {
-	char *error_message;
+	if (args == NULL || args[0] == NULL)
+		return;
 
-	if (args[1] == NULL)
+	if (unsetenv(args[0]) == -1)
 	{
-		error_message = "Usage: unsetenv VARIABLE\n";
-		write(STDERR_FILENO, error_message, strlen(error_message));
-
 		return;
 	}
-	if (unsetenv(args[1]) != 0)
-		perror("unsetenv");
 }

@@ -15,7 +15,7 @@ char **custom_tokenize(char *input, const char *delimiters, int *token_count)
 	int count = 0;
 
 	if (input == NULL || delimiters == NULL)
-		return NULL;
+		return (NULL);
 
 	input_copy = strdup(input);
 
@@ -28,7 +28,7 @@ char **custom_tokenize(char *input, const char *delimiters, int *token_count)
 
 	while (token != NULL)
 	{
-		tokens = realloc(tokens, (count + 1) * sizeof(char *));
+		tokens = realloc(tokens, (count + 2) * sizeof(char *));
 		if (tokens == NULL)
 		{
 			perror("realloc");
@@ -46,6 +46,7 @@ char **custom_tokenize(char *input, const char *delimiters, int *token_count)
 		token = strtok(NULL, delimiters);
 	}
 	free(input_copy);
+	tokens[count] = NULL;
 	*token_count = count;
 	return (tokens);
 }
@@ -58,7 +59,7 @@ char **custom_tokenize(char *input, const char *delimiters, int *token_count)
  */
 char *custom_tokenizer(char *str, const char *delimiters)
 {
-	static char *saved_str = NULL;
+	static char *saved_str;
 	char *token = NULL;
 
 	if (str != NULL)

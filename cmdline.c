@@ -10,9 +10,8 @@ void handle_cmdline(char *input_line)
 	char *command, **args;
 	int status, i;
 
-	if (input_line == NULL || input_line[0] == '\0'|| is_whitespace(input_line))
+	if (input_line == NULL || input_line[0] == '\0' || is_whitespace(input_line))
 	{
-		free(input_line);
 		return;
 	}
 
@@ -35,8 +34,8 @@ void handle_cmdline(char *input_line)
 		free(args);
 	}
 	printf("\n");
-	free(input_line);
 	free(command);
+	return;
 }
 
 /**

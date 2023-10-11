@@ -8,7 +8,7 @@
 char *parse_command(char *input)
 {
 	char *command = NULL;
-	int token_count, i;
+	int token_count;
 	char **tokens;
 
 	tokens = custom_tokenize(input, " \t\n", &token_count);
@@ -16,11 +16,29 @@ char *parse_command(char *input)
 	if (token_count > 0)
 		command = strdup(tokens[0]);
 
-	for (i = 0; i < token_count; i++)
-		free(tokens[i]);
-	free(tokens);
+	_free(tokens);
 
 	return (command);
+}
+
+/**
+ * _free - .....
+ * @array: ....
+ * Return: nothing
+	free(cmd);
+ */
+void _free(char **array) {
+	int i = 0;
+	if (array == NULL) {
+		return;
+	}
+
+	for (i = 0; array[i] != NULL; i++) {
+
+		free(array[i]);
+	}
+
+	free(array);
 }
 
 /**
@@ -54,10 +72,10 @@ char **parse_arguments(char *input)
 			}
 		}
 		args[token_count - 1] = NULL;
-		free(tokens);
+		_free(tokens);
 		return (args);
 	}
 	printf("Token count: %i\n", token_count);
-	free(tokens);
+	_free(tokens);
 	return (NULL);
-}	
+}

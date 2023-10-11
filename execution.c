@@ -46,28 +46,18 @@ int execute_command(char *full_path, char **args)
 
 int execute_any_command(char *cmd, char **args)
 {
-	char *path = getenv("PATH");
-	char *path_copy = strdup(path);
-	char *full_path = NULL;
-	char *token = custom_tokenizer(path_copy, ":");
+	char *path = getenv("PATH"), *path_copy = strdup(path);
+	char *full_path = NULL, *token = custom_tokenizer(path_copy, ":");
 	int status = 1;
 
 	if (is_builtin_command(cmd))
 	{
-		printf("Definitely a built in\n");
-		if (strcmp(cmd, "setenv") == 0)
-			handle_setenv(args);
-		else if (strcmp(cmd, "unsetenv") == 0)
-			handle_unsetenv(args);
-		else if (strcmp(cmd, "env") == 0)
-			handle_env(args);
-		else
-			return (1);
+		serve_builtins(cmd, args);
 		return (1);
 	}
 
 	if (strchr(cmd, '/') != NULL)
-		return execute_command(cmd, args);
+		return (execute_command(cmd, args));
 
 	if (path == NULL || path[0] == '\0')
 		return (127);
@@ -81,9 +71,7 @@ int execute_any_command(char *cmd, char **args)
 			free(path_copy);
 			return (1);
 		}
-		strcpy(full_path, token);
-		strcat(full_path, "/");
-		strcat(full_path, cmd);
+		sprintf(full_path, "%s/%s", token, cmd);
 
 		if (access(full_path, X_OK) == 0)
 		{
@@ -96,7 +84,7 @@ int execute_any_command(char *cmd, char **args)
 		token = custom_tokenizer(NULL, ":");
 	}
 	free(path_copy);
-	printf("%s: command not found\n", SHELL_NAME);
+	perror(SHELL_NAME);
 	return (127);
 }
 
