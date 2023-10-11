@@ -46,8 +46,8 @@ int execute_command(char *full_path, char **args)
 
 int execute_any_command(char *cmd, char **args)
 {
-	char *path = getenv("PATH"), *path_copy = strdup(path);
-	char *full_path = NULL, *token = custom_tokenizer(path_copy, ":");
+	char *path = getenv("PATH"), *path_copy;
+	char *full_path = NULL, *token;
 	int status = 1;
 
 	if (is_builtin_command(cmd))
@@ -55,13 +55,13 @@ int execute_any_command(char *cmd, char **args)
 		serve_builtins(cmd, args);
 		return (1);
 	}
-
 	if (strchr(cmd, '/') != NULL)
 		return (execute_command(cmd, args));
-
 	if (path == NULL || path[0] == '\0')
 		return (127);
 
+	path_copy = strdup(path);
+	token = custom_tokenizer(path_copy, ":");
 	while (token != NULL)
 	{
 		full_path = malloc(strlen(token) + strlen(cmd) + 2);
@@ -72,7 +72,6 @@ int execute_any_command(char *cmd, char **args)
 			return (1);
 		}
 		sprintf(full_path, "%s/%s", token, cmd);
-
 		if (access(full_path, X_OK) == 0)
 		{
 			status = execute_command(full_path, args);
@@ -87,7 +86,6 @@ int execute_any_command(char *cmd, char **args)
 	perror(SHELL_NAME);
 	return (127);
 }
-
 /**
  * construct_args - ....
  * @command: .....
