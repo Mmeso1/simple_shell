@@ -54,9 +54,9 @@ char **parse_arguments(char *input)
 
 	tokens = custom_tokenize(input, " \t\n", &token_count);
 
-	if (token_count > 1)
+	if (token_count > 0)
 	{
-		args = malloc(sizeof(char *) * (token_count));
+		args = malloc(sizeof(char *) * (token_count + 1));
 		if (args == NULL)
 		{
 			perror("malloc");

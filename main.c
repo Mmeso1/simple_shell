@@ -38,3 +38,15 @@ int main(int argc, char *argv[])
 	}
 	return (0);
 }
+
+
+int startsWith(const char *str, const char *prefix) {
+    size_t prefixLength = strlen(prefix);
+    size_t strLength = strlen(str);
+
+    if (prefixLength > strLength) {
+        return 0;
+    }
+
+    return strncmp(str, prefix, prefixLength) == 0;
+}

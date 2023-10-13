@@ -7,7 +7,7 @@
  */
 void handle_cd(char **args)
 {
-	char *new_dir;
+	char *new_dir, *full_new_dir;
 	char *current_dir;
 
 	if (args == NULL || args[0] == NULL)
@@ -34,11 +34,13 @@ void handle_cd(char **args)
 		perror(SHELL_NAME);
 	else
 	{
-		if (setenv("PWD", getcwd(NULL, 0), 1) != 0)
+		full_new_dir = getcwd(NULL, 0);
+		if (setenv("PWD", full_new_dir, 1) != 0)
 			perror(SHELL_NAME);
 
 		if (setenv("OLDPWD", current_dir, 1) != 0)
 			perror(SHELL_NAME);
 	}
 	free(current_dir);
+	free(full_new_dir);
 }
