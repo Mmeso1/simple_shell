@@ -4,24 +4,30 @@
  * @args: the args array
  * Return: nothing
  */
-void handle_exit(char **args)
+void handle_exit(char *input_line)
 {
-	int status;
+	int status, token_length = 0;
+	char **tokens = custom_tokenize(input_line, " ", &token_length);
+	
+	free(input_line);
 
-	if (args == NULL || args[0] == NULL)
+	if (tokens == NULL || token_length == 1)
 	{
+		_free(tokens);
 		exit(EXIT_SUCCESS);
 	}
 
-	if (args[0] != NULL)
+	if (token_length > 1)
 	{
-		status = atoi(args[0]);
-		if (status > 0 || (status == 0 && args[0][0] == '0'))
+		status = atoi(tokens[1]);
+		if (status >= 0)
 		{
+			_free(tokens);
 			exit(status);
 		}
 		else
 		{
+			_free(tokens);
 			perror(SHELL_NAME);
 			exit(2);
 		}

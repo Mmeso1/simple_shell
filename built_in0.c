@@ -13,7 +13,6 @@ int serve_builtins(const char *cmd, char **args)
 	int i;
 
 	mapBuiltin builtin_cmds[] = {
-		{"exit", handle_exit},
 		{"env", handle_env},
 		{"setenv", handle_setenv},
 		{"unsetenv", handle_unsetenv},
