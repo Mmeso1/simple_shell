@@ -14,7 +14,7 @@ void process_script_file(const char *filename)
 
 	if (script_file == NULL)
 	{
-		perror("./hsh");
+		fprintf(stderr, "%s: 0: Can't open %s\n", "./hsh", filename);
 		exit(1);
 	}
 

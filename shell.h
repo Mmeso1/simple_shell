@@ -2,6 +2,7 @@
 #define SHELL_H
 
 #include <ctype.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -21,6 +22,8 @@ extern char **environ;
 
 void _free(char **array);
 void display_prompt(void);
+const char *get_shell_name(void);
+void set_shell_name(const char *name);
 char *custom_getline();
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 int startsWith(const char *str, const char *prefix);

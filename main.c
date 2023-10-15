@@ -10,7 +10,6 @@ int main(int argc, char *argv[])
 {
 	char *input_line;
 	int interactive = isatty(STDIN_FILENO);
-	const char *SHELL_NAME = argv[0];
 
 	if (interactive && argc == 1)
 	{
@@ -18,7 +17,6 @@ int main(int argc, char *argv[])
 		{
 			display_prompt();
 			input_line = custom_getline();
-
 			if (startsWith(input_line, "exit"))
 			{
 				handle_exit(input_line);
@@ -37,12 +35,17 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		if (argc != 2)
+		char *input_line = NULL;
+		size_t input_line_size = 0;
+
+		if (argc == 2)
+			process_script_file(argv[1]);
+		else
 		{
-			perror(SHELL_NAME);
-			return (1);
+			while (_getline(&input_line, &input_line_size, stdin) != -1)
+				handle_cmdline(input_line);
+			free(input_line);
 		}
-		process_script_file(argv[1]);
 	}
 	return (0);
 }
