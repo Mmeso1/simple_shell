@@ -6,23 +6,20 @@
  * @argv: the argument vector
  * Return: 0 if successful
  */
-const char *SHELL_NAME = NULL;
 int main(int argc, char *argv[])
 {
 	char *input_line;
 	int interactive = isatty(STDIN_FILENO);
+	const char *SHELL_NAME = argv[0];
 
-	(void)argc;
-	SHELL_NAME = argv[0];
-
-	if (interactive)
+	if (interactive && argc == 1)
 	{
-		while(1)
+		while (1)
 		{
 			display_prompt();
 			input_line = custom_getline();
 
-			if(startsWith(input_line, "exit"))
+			if (startsWith(input_line, "exit"))
 			{
 				handle_exit(input_line);
 				return (1);
@@ -40,19 +37,13 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		return (1);
+		if (argc != 2)
+		{
+			perror(SHELL_NAME);
+			return (1);
+		}
+		process_script_file(argv[1]);
 	}
 	return (0);
 }
 
-
-int startsWith(const char *str, const char *prefix) {
-    size_t prefixLength = strlen(prefix);
-    size_t strLength = strlen(str);
-
-    if (prefixLength > strLength) {
-        return 0;
-    }
-
-    return strncmp(str, prefix, prefixLength) == 0;
-}

@@ -59,7 +59,7 @@ char **parse_arguments(char *input)
 		args = malloc(sizeof(char *) * (token_count + 1));
 		if (args == NULL)
 		{
-			perror("malloc");
+			perror("./hsh");
 			exit(EXIT_FAILURE);
 		}
 		for (i = 1; i < token_count; i++)
@@ -67,7 +67,7 @@ char **parse_arguments(char *input)
 			args[i - 1] = strdup(tokens[i]);
 			if (args[i - 1] == NULL)
 			{
-				perror("strdup");
+				perror("./hsh");
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -75,7 +75,6 @@ char **parse_arguments(char *input)
 		_free(tokens);
 		return (args);
 	}
-	printf("Token count: %i\n", token_count);
 	_free(tokens);
 	return (NULL);
 }

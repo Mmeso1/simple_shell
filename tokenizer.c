@@ -21,7 +21,7 @@ char **custom_tokenize(char *input, const char *delimiters, int *token_count)
 
 	if (input_copy == NULL)
 	{
-		perror("strdup");
+		perror("./hsh");
 		exit(EXIT_FAILURE);
 	}
 	token = strtok(input_copy, delimiters);
@@ -31,14 +31,14 @@ char **custom_tokenize(char *input, const char *delimiters, int *token_count)
 		tokens = realloc(tokens, (count + 2) * sizeof(char *));
 		if (tokens == NULL)
 		{
-			perror("realloc");
+			perror("./hsh");
 			exit(EXIT_FAILURE);
 		}
 
 		tokens[count] = strdup(token);
 		if (tokens[count] == NULL)
 		{
-			perror("malloc");
+			perror("./hsh");
 			exit(EXIT_FAILURE);
 		}
 

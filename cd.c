@@ -19,27 +19,27 @@ void handle_cd(char **args)
 
 	if (new_dir == NULL)
 	{
-		perror(SHELL_NAME);
+		perror("./hsh");
 		return;
 	}
 
 	current_dir = getcwd(NULL, 0);
 	if (current_dir == NULL)
 	{
-		perror(SHELL_NAME);
+		perror("./hsh");
 		return;
 	}
 
 	if (chdir(new_dir) != 0)
-		perror(SHELL_NAME);
+		perror("./hsh");
 	else
 	{
 		full_new_dir = getcwd(NULL, 0);
 		if (setenv("PWD", full_new_dir, 1) != 0)
-			perror(SHELL_NAME);
+			perror("./hsh");
 
 		if (setenv("OLDPWD", current_dir, 1) != 0)
-			perror(SHELL_NAME);
+			perror("./hsh");
 	}
 	free(current_dir);
 	free(full_new_dir);

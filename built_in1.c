@@ -28,7 +28,7 @@ void handle_exit(char *input_line)
 		else
 		{
 			_free(tokens);
-			perror(SHELL_NAME);
+			perror("./hsh");
 			exit(2);
 		}
 	}

@@ -19,14 +19,14 @@ int execute_command(char *full_path, char **args)
 
 	if (child_pid == -1)
 	{
-		perror("fork");
+		perror("./hsh");
 		return (1);
 	}
 	if (child_pid == 0)
 	{
 		if (execve(full_path, command_with_args, envp) == -1)
 		{
-			perror(SHELL_NAME);
+			perror("./hsh");
 			_exit(127);
 		}
 	}
@@ -67,7 +67,7 @@ int execute_any_command(char *cmd, char **args)
 		full_path = malloc(strlen(token) + strlen(cmd) + 2);
 		if (full_path == NULL)
 		{
-			perror(SHELL_NAME);
+			perror("./hsh");
 			free(path_copy);
 			return (1);
 		}
@@ -83,7 +83,7 @@ int execute_any_command(char *cmd, char **args)
 		token = custom_tokenizer(NULL, ":");
 	}
 	free(path_copy);
-	perror(SHELL_NAME);
+	perror("./hsh");
 	return (127);
 }
 /**
@@ -103,7 +103,7 @@ char **construct_args(char *command, char **args)
 		command_with_args = malloc(sizeof(char *) * 2);
 		if (command_with_args == NULL)
 		{
-			perror("malloc");
+			perror("./hsh");
 			exit(EXIT_FAILURE);
 		}
 		command_with_args[0] = command;
@@ -118,7 +118,7 @@ char **construct_args(char *command, char **args)
 	command_with_args = malloc(sizeof(char *) * (token_count + 2));
 	if (command_with_args == NULL)
 	{
-		perror("malloc");
+		perror("./hsh");
 		exit(EXIT_FAILURE);
 	}
 

@@ -15,8 +15,6 @@ void handle_cmdline(char *input_line)
 		return;
 	}
 
-	printf("You typed: %s\n", input_line);
-
 	command = parse_command(input_line);
 	args = parse_arguments(input_line);
 

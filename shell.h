@@ -10,8 +10,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-extern const char *SHELL_NAME;
-
 typedef struct mapBuiltin
 {
 	const char *cmd_name;
@@ -24,6 +22,7 @@ extern char **environ;
 void _free(char **array);
 void display_prompt(void);
 char *custom_getline();
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 int startsWith(const char *str, const char *prefix);
 int execute_command(char *cmd, char **args);
 char *parse_command(char *input);
@@ -41,5 +40,6 @@ void handle_setenv(char **args);
 void handle_unsetenv(char **args);
 void handle_cd(char **args);
 int serve_builtins(const char *cmd, char **args);
+void process_script_file(const char *filename);
 
 #endif
