@@ -25,18 +25,17 @@ char *parse_command(char *input)
  * _free - .....
  * @array: ....
  * Return: nothing
-	free(cmd);
  */
-void _free(char **array) {
+void _free(char **array)
+{
 	int i = 0;
-	if (array == NULL) {
-		return;
-	}
 
-	for (i = 0; array[i] != NULL; i++) {
+	if (array == NULL)
+		return;
+
+	for (i = 0; array[i] != NULL; i++)
 
 		free(array[i]);
-	}
 
 	free(array);
 }

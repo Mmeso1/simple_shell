@@ -14,7 +14,7 @@ void process_script_file(const char *filename)
 
 	if (script_file == NULL)
 	{
-		perror("./hsh");
+		fprintf(stderr, "%s: 0: Can't open %s\n", "./hsh", filename);
 		exit(1);
 	}
 
@@ -28,4 +28,18 @@ void process_script_file(const char *filename)
 	}
 	fclose(script_file);
 	free(input_line);
+}
+
+/**
+ * process_unatty_input - to proceess input in non-interactive
+ * or non isatty mode
+ * @input_line: ....
+ * Return: ...
+ */
+void process_unatty_input(char *input_line)
+{
+	if (startsWith(input_line, "exit"))
+		handle_exit(input_line);
+	else
+		handle_cmdline(input_line);
 }

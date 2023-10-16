@@ -10,6 +10,15 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+/**
+ * struct mapBuiltin - to map a builtin command to its func
+ * @cmd_name: the command name
+ * @builtin_func: A function pointer to the
+ * implementation of the built-in command.
+ *
+ * This struct associates the name of a built-in command with its
+ * corresponding function.
+ */
 typedef struct mapBuiltin
 {
 	const char *cmd_name;
@@ -41,5 +50,6 @@ void handle_unsetenv(char **args);
 void handle_cd(char **args);
 int serve_builtins(const char *cmd, char **args);
 void process_script_file(const char *filename);
+void process_unatty_input(char *input_line);
 
 #endif

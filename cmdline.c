@@ -8,7 +8,7 @@
 void handle_cmdline(char *input_line)
 {
 	char *command, **args;
-	int status, i;
+	int i;
 
 	if (input_line == NULL || input_line[0] == '\0' || is_whitespace(input_line))
 	{
@@ -18,22 +18,16 @@ void handle_cmdline(char *input_line)
 	command = parse_command(input_line);
 	args = parse_arguments(input_line);
 
-	status = execute_any_command(command, args);
+	execute_any_command(command, args);
 
-	printf("This is the returned status: %i, cmd: %s\n", status, command);
 	if (args != NULL)
 	{
-		for (i = 0; args[i] != NULL; i++)
-		{
-			printf("Argument %d: %s\n", i, args[i]);
-		}
 		for (i = 0; args[i] != NULL; i++)
 			free(args[i]);
 		free(args);
 	}
 	printf("\n");
 	free(command);
-	return;
 }
 
 /**

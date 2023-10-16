@@ -29,6 +29,7 @@ char *custom_getline()
  * @lineptr: ..
  * @n: ..
  * @stream: ...
+ * Return: ...
  */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
@@ -39,7 +40,6 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 
 	if (lineptr == NULL || n == NULL || stream == NULL)
 		return (-1);
-
 	while ((ch = fgetc(stream)) != EOF)
 	{
 		if (len >= (ssize_t)(size - 1))
@@ -55,24 +55,8 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 		}
 		line[len] = (char)ch;
 		len++;
-
-		if (ch == '\n')
+		if (ch == '\n' || ch == EOF)
 			break;
-	}
-	if (len == 0)
-	{
-		if (line != NULL)
-			free(line);
-		*lineptr = NULL;
-		*n = 0;
-		return (-1);
-	}
-	if (ch == EOF && len == 1)
-	{
-		free(line);
-		*lineptr = NULL;
-		*n = 0;
-		return (-1);
 	}
 	line[len] = '\0';
 	*lineptr = line;
