@@ -40,6 +40,7 @@ char *strtrim(char *str);
 char *remove_comments(char *line);
 int handle_logical_operator(char *cmdline);
 int execute_command(char *cmd, char **args);
+int execute_operator(char *cmd, int *status);
 char *parse_command(char *input);
 char **parse_arguments(char *input);
 char **custom_tokenize(char *input, const char *delimiters, int *token_count);

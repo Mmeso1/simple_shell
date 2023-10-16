@@ -24,7 +24,7 @@ void handle_cmdline(char *input_line)
 
 		if (strstr(token, "&&") || strstr(token, "||"))
 		{
-			printf("Contains logical operator\n");
+			handle_logical_operator(token);
 		}
 		else
 		{
