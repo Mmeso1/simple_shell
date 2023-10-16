@@ -1,33 +1,44 @@
 #include "shell.h"
 
 /**
- * handle_cmdline - ...
+ * handle_cmdline - more info on functons in readme
  * @input_line: the input line
  * Return: ....
  */
 void handle_cmdline(char *input_line)
 {
-	char *command, **args;
-	int i;
+	char *command, **args, **tokens, *token;
+	int i, count = 0;
 
 	if (input_line == NULL || input_line[0] == '\0' || is_whitespace(input_line))
 	{
 		return;
 	}
 
-	command = parse_command(input_line);
-	args = parse_arguments(input_line);
+	input_line = remove_comments(input_line);
+	tokens = custom_tokenize(strtrim(input_line), ";", &count);
 
-	execute_any_command(command, args);
-
-	if (args != NULL)
+	for (i = 0; i < count; i++)
 	{
-		for (i = 0; args[i] != NULL; i++)
-			free(args[i]);
-		free(args);
+		token = tokens[i];
+
+		if (strstr(token, "&&") || strstr(token, "||"))
+		{
+			printf("Contains logical operator\n");
+		}
+		else
+		{
+			command = parse_command(token);
+			args = parse_arguments(token);
+			execute_any_command(command, args);
+
+			if (args != NULL)
+				_free(args);
+			free(command);
+		}
 	}
+	_free(tokens);
 	printf("\n");
-	free(command);
 }
 
 /**

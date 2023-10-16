@@ -25,6 +25,7 @@ void process_script_file(const char *filename)
 					&input_line_size, script_file)) != -1)
 	{
 		handle_cmdline(input_line);
+		free(input_line);
 	}
 	fclose(script_file);
 	free(input_line);

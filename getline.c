@@ -55,11 +55,39 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 		}
 		line[len] = (char)ch;
 		len++;
-		if (ch == '\n' || ch == EOF)
+		if (ch == '\n')
 			break;
 	}
-	line[len] = '\0';
-	*lineptr = line;
-	*n = size;
+	if (len > 0)
+	{
+		line[len] = '\0';
+		*lineptr = line;
+		*n = size;
+	}
+	else
+	{
+		free(line);
+		*lineptr = NULL;
+		*n = 0;
+		return (-1);
+	}
 	return (len);
+}
+
+/**
+ * remove_comments - ...
+ * @input_line: ...
+ * Return: nothing
+ */
+char *remove_comments(char *line)
+{
+	char *result = line;
+	char *comment = strchr(line, '#');
+
+	if (comment != NULL)
+	{
+		*comment = '\0';
+		result = line;
+	}
+	return (result);
 }
