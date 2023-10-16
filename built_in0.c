@@ -19,7 +19,7 @@ int serve_builtins(const char *cmd, char **args)
 		{"cd", handle_cd},
 		{NULL, NULL}
 	};
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 6; i++)
 	{
 		if (strcmp(builtin_cmds[i].cmd_name, cmd) == 0)
 		{

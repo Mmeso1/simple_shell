@@ -17,7 +17,6 @@ int main(int argc, char *argv[])
 		{
 			display_prompt();
 			input_line = custom_getline();
-
 			if (startsWith(input_line, "exit"))
 			{
 				handle_exit(input_line);

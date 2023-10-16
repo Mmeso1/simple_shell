@@ -6,6 +6,7 @@ const char *builtin_commands[] = {
 	"setenv",
 	"unsetenv",
 	"env",
+	"exit",
 	NULL
 };
 
