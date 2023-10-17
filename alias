@@ -1,0 +1,26 @@
+- alias creation
+	condition: if it has args and args contains an '=' sign
+	args: name='value' name2='value2'
+	struct(alias):
+		key (char *)
+		value (char *)
+	array of aliases:
+		on creation you append new aliases to this array
+- printing all aliases
+	condition: if it has no args
+	print all key value pairs in aliases array
+- printing aliases based on keys provided
+	condition: if it has args but no equals sign
+	args: name name2 name3 ...
+	loop through all the keys and for each key find it in
+	aliases array and print it in the correct format
+- executing aliases
+	if it is an alias after getting the command
+	check if it is an alias if it is an alias it
+	returns the alias else it will return NULL
+	replace(inputline, command, value):
+		replaces the command in the input line with the value of the alias
+		eg: replace('list ..', 'list', 'ls -al')
+		    will return 'ls -al ..'
+	you pass back the inputline to your execute any command function
+add_aliases, print_all_aliases, prints_aliases, check_alias

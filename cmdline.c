@@ -38,7 +38,6 @@ void handle_cmdline(char *input_line)
 		}
 	}
 	_free(tokens);
-	printf("\n");
 }
 
 /**

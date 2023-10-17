@@ -25,18 +25,18 @@ int startsWith(const char *str, const char *prefix)
 char *strtrim(char *str)
 {
 	int len = strlen(str), start = 0;
-	
+
 	while (len > 0 && isspace((unsigned char)str[len - 1]))
 	{
 		len--;
 	}
 	str[len] = '\0';
-	
+
 	while (isspace((unsigned char)str[start]))
 		start++;
-	
+
 	if (start > 0)
-	       memmove(str, str + start, len - start + 1);
-	
+		memmove(str, str + start, len - start + 1);
+
 	return (str);
 }

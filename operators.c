@@ -2,19 +2,19 @@
 
 /**
  * handle_logical_operator - for && and ||
- * @input_line: the input line that cntains the operators
+ * @cmdline: the input line that cntains the operators
  * Return: status
  */
 int handle_logical_operator(char *cmdline)
 {
-        char **tokens = NULL, *operators;
-        int i, count = 0, status = 0;
+	char **tokens = NULL, *operators;
+	int i, count = 0, status = 0;
 	int executeRightSide = 1;
 
 	operators = store_operators(cmdline);
 	tokens = custom_tokenize(cmdline, "&&||", &count);
-        for (i = 0; i < count; i++)
-        {
+	for (i = 0; i < count; i++)
+	{
 		if (operators[i] == 38)
 		{
 			execute_operator(tokens[i], &status);
@@ -43,25 +43,26 @@ int handle_logical_operator(char *cmdline)
  * execute_operator - to execute the cmd with logical operators
  * @cmd: ...
  * @status: ....
+ * Return: the status
  */
 int execute_operator(char *cmd, int *status)
 {
-        char **args, *command;
-        int cmd_result;
+	char **args, *command;
+	int cmd_result;
 
-        command = parse_command(cmd);
-        args = parse_arguments(cmd);
-        cmd_result = execute_any_command(command, args);
+	command = parse_command(cmd);
+	args = parse_arguments(cmd);
+	cmd_result = execute_any_command(command, args);
 
-        if (WIFEXITED(cmd_result))
-        {
-                *status = WEXITSTATUS(cmd_result);
-                return (1);
-        }
-        *status = 0;
+	if (WIFEXITED(cmd_result))
+	{
+		*status = WEXITSTATUS(cmd_result);
+		return (1);
+	}
+	*status = 0;
 	_free(args);
 	free(command);
-        return (0);
+	return (0);
 }
 
 /**
@@ -73,7 +74,7 @@ char *store_operators(char *cmd)
 {
 	int cmdLength = strlen(cmd);
 	int i = 0, c = 0;
-	char *operators = (char*)malloc(cmdLength * sizeof(char));
+	char *operators = (char *)malloc(cmdLength * sizeof(char));
 
 	while (i < cmdLength)
 	{
