@@ -107,8 +107,9 @@ int handle_logical_operator(char *cmdline)
 	{
 		if (is_and_operator)
 		{
-			if (!execute_operator(tokens[i], &status))
+			if (!execute_operator(tokens[i], &status) && status != 0)
 			{
+				printf("status from op: %i\n", status);
 				return (0);
 			}
 		}
@@ -138,6 +139,7 @@ int execute_operator(char *cmd, int *status)
 	if (WIFEXITED(cmd_result))
 	{
 		*status = WEXITSTATUS(cmd_result);
+		printf("status: %d\n", *status);
 		return (1);
 	}
 	*status = 0;
