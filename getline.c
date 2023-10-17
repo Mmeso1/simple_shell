@@ -76,7 +76,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 
 /**
  * remove_comments - ...
- * @input_line: ...
+ * @line: ...
  * Return: nothing
  */
 char *remove_comments(char *line)
@@ -92,56 +92,3 @@ char *remove_comments(char *line)
 	return (result);
 }
 
-/**
- * handle_logical_operator - for && and ||
- * @input_line: the input line that cntains the operators
- * Return: status
- */
-int handle_logical_operator(char *cmdline)
-{
-	char **tokens = NULL;
-	int i, count = 0, status = 1, is_and_operator = 1;
-
-	tokens = custom_tokenize(cmdline, "&&||", &count);
-	for (i = 0; i < count; i++)
-	{
-		if (is_and_operator)
-		{
-			if (!execute_operator(tokens[i], &status) && status != 0)
-			{
-				printf("status from op: %i\n", status);
-				return (0);
-			}
-		}
-		else
-		{
-			printf("Not the correct comp\n");
-		}
-	}
-	_free(tokens);
-	return (status);
-}
-
-/**
- * execute_operator - to execute the cmd with logical operators
- * @cmd: ...
- * @status: ....
- */
-int execute_operator(char *cmd, int *status)
-{
-	char **args, *command;
-	int cmd_result;
-
-	command = parse_command(cmd);
-	args = parse_arguments(cmd);
-	cmd_result = execute_any_command(command, args);
-
-	if (WIFEXITED(cmd_result))
-	{
-		*status = WEXITSTATUS(cmd_result);
-		printf("status: %d\n", *status);
-		return (1);
-	}
-	*status = 0;
-	return (0);
-}
