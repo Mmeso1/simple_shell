@@ -81,14 +81,14 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
  */
 char *remove_comments(char *line)
 {
-	char *result = line;
 	char *comment = strchr(line, '#');
 
+	if (line == NULL)
+		return (NULL);
 	if (comment != NULL)
 	{
 		*comment = '\0';
-		result = line;
 	}
-	return (result);
+	return (line);
 }
 
