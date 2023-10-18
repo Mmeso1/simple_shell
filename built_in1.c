@@ -25,7 +25,7 @@ void handle_exit(char *input_line)
 		status = atoi(tokens[1]);
 		if (!temp || status < 0)
 		{
-			fprintf(stderr, "%s: %d: Illegal number: %s\n", "./hsh", 1, tokens[1]);
+			fprintf(stderr, "%s: %d: Illegal number: %s", "./hsh", 1, tokens[1]);
 			_free(tokens);
 			exit(2);
 		}
