@@ -21,7 +21,7 @@ void process_script_file(const char *filename)
 	input_line = NULL;
 	input_line_size = 0;
 
-	while ((bytes_read = _getline(&input_line,
+	while ((bytes_read = getline(&input_line,
 					&input_line_size, script_file)) != -1)
 	{
 		handle_cmdline(input_line);
