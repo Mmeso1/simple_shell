@@ -18,10 +18,7 @@ int main(int argc, char *argv[])
 			display_prompt();
 			input_line = custom_getline();
 			if (startsWith(input_line, "exit"))
-			{
 				handle_exit(input_line);
-				return (1);
-			}
 			if (!input_line)
 			{
 				printf("\n");
@@ -41,7 +38,7 @@ int main(int argc, char *argv[])
 			process_script_file(argv[1]);
 		else
 		{
-			while (_getline(&input_line, &input_line_size, stdin) != -1)
+			while (getline(&input_line, &input_line_size, stdin) != -1)
 				process_unatty_input(input_line);
 			free(input_line);
 		}
