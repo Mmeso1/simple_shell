@@ -8,7 +8,7 @@ char *custom_getline()
 {
 	char *input_line = NULL;
 	size_t line_size = 0;
-	ssize_t line_len = _getline(&input_line, &line_size, stdin);
+	ssize_t line_len = getline(&input_line, &line_size, stdin);
 
 	if (line_len == -1)
 	{
