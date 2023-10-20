@@ -18,17 +18,11 @@ void handle_cd(char **args)
 		new_dir = args[0];
 
 	if (new_dir == NULL)
-	{
-		perror("./hsh");
 		return;
-	}
 
 	current_dir = getcwd(NULL, 0);
 	if (current_dir == NULL)
-	{
-		perror("./hsh");
 		return;
-	}
 
 	if (chdir(new_dir) != 0)
 		perror("./hsh");
