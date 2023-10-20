@@ -2,7 +2,7 @@
 
 ################################################################################
 # Description for the intranet check (one line, support Markdown syntax)
-# Remove `$HOME` and execute `cd` without parameter
+# Cd to `/tmp`, then to `dev` and execute `cd -`
 
 ################################################################################
 # The variable 'compare_with_sh' IS OPTIONNAL
@@ -21,7 +21,9 @@
 # as follows: "echo $shell_input | ./hsh"
 #
 # It can be empty and multiline
-shell_input="cd
+shell_input="cd /tmp
+cd /dev
+cd -
 /bin/pwd"
 
 ################################################################################
@@ -42,8 +44,6 @@ shell_input="cd
 # Return value: Discarded
 function check_setup()
 {
-	OLDHOME="$HOME"
-	unset HOME
 	return 0
 }
 
@@ -84,8 +84,6 @@ function sh_setup()
 function check_callback()
 {
 	status=$1
-
-	export HOME="$OLDHOME"
 
 	return $status
 }

@@ -11,14 +11,21 @@ void handle_cd(char **args)
 	char *current_dir;
 
 	if (args == NULL || args[0] == NULL)
+	{
 		new_dir = getenv("HOME");
+		if (new_dir == NULL)
+			return;
+	}
 	else if (strcmp(args[0], "-") == 0)
 		new_dir = getenv("OLDPWD");
 	else
 		new_dir = args[0];
 
 	if (new_dir == NULL)
+	{
+		fprintf(stdout, "%s\n", getenv("PWD"));
 		return;
+	}
 
 	current_dir = getcwd(NULL, 0);
 	if (current_dir == NULL)
