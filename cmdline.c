@@ -1,6 +1,6 @@
 #include "shell.h"
 
-static int __attribute__((unused)) STATUS;
+static int __attribute__((unused)) STATUS = 0;
 
 /**
  * handle_cmdline - more info on functons in readme
