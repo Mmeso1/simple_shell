@@ -32,7 +32,7 @@ void handle_cd(char **args)
 		return;
 
 	if (chdir(new_dir) != 0)
-		perror("./hsh");
+		fprintf(stderr, "./hsh: 1: cd: can't cd to %s\n", args[0]);
 	else
 	{
 		full_new_dir = getcwd(NULL, 0);

@@ -2,7 +2,7 @@
 
 ################################################################################
 # Description for the intranet check (one line, support Markdown syntax)
-# Execute `cd` without parameter
+# Try to `cd /hbtn` (Folder does not exist)
 
 ################################################################################
 # The variable 'compare_with_sh' IS OPTIONNAL
@@ -21,7 +21,7 @@
 # as follows: "echo $shell_input | ./hsh"
 #
 # It can be empty and multiline
-shell_input="cd
+shell_input="cd /hbtn
 /bin/pwd"
 
 ################################################################################
