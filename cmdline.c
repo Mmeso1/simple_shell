@@ -87,12 +87,14 @@ void handle_exit(char *input_line)
 	{
 		temp = strtol(tokens[1], &endptr, 10);
 		status = atoi(tokens[1]);
-		if (!temp || status < 0)
+		if (!temp)
 		{
 			fprintf(stderr, "%s: %d: Illegal number: %s\n", "./hsh", 1, tokens[1]);
 			_free(tokens);
-			exit(2);
+			exit(STATUS);
 		}
+		else if (status < 0)
+			exit(2);
 		else
 		{
 			_free(tokens);
