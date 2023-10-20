@@ -12,7 +12,6 @@ int execute_command(char *full_path, char **args)
 {
 	pid_t child_pid;
 	int status, exit_status;
-	char *envp[] = {"TERM=xterm", NULL};
 	char **command_with_args = construct_args(full_path, args);
 
 	child_pid = fork();
@@ -24,7 +23,7 @@ int execute_command(char *full_path, char **args)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(full_path, command_with_args, envp) == -1)
+		if (execve(full_path, command_with_args, environ) == -1)
 		{
 			perror("./hsh");
 			_exit(127);
