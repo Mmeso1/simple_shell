@@ -91,12 +91,12 @@ void handle_exit(char *input_line)
 		{
 			fprintf(stderr, "%s: %d: Illegal number: %s", "./hsh", 1, tokens[1]);
 			_free(tokens);
-			exit(2);
+			exit(STATUS);
 		}
 		else
 		{
 			_free(tokens);
-			exit(STATUS);
+			exit(status);
 		}
 	}
 }
