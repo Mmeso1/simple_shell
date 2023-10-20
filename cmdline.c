@@ -33,7 +33,6 @@ void handle_cmdline(char *input_line)
 			command = parse_command(token);
 			args = parse_arguments(token);
 			STATUS = execute_any_command(command, args);
-			printf("%i\n", STATUS);
 
 			if (args != NULL)
 				_free(args);
@@ -82,7 +81,6 @@ void handle_exit(char *input_line)
 	if (tokens == NULL || token_length == 1)
 	{
 		_free(tokens);
-		printf("%i\n", STATUS);
 		exit(STATUS);
 	}
 
@@ -99,7 +97,7 @@ void handle_exit(char *input_line)
 		else
 		{
 			_free(tokens);
-			exit(status);
+			exit(STATUS);
 		}
 	}
 }
