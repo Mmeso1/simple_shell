@@ -41,7 +41,7 @@ void handle_cd(char **args)
 
 		if (setenv("OLDPWD", current_dir, 1) != 0)
 			perror("./hsh");
-		if (strcmp(args[0], "-") == 0)
+		if (args[0] && strcmp(args[0], "-") == 0)
 			fprintf(stdout, "%s\n", getenv("PWD"));
 	}
 	free(current_dir);

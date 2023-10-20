@@ -2,7 +2,7 @@
 
 ################################################################################
 # Description for the intranet check (one line, support Markdown syntax)
-# Cd to `/tmp`, then to `dev` and execute `cd -`
+# Execute `cd` without parameter
 
 ################################################################################
 # The variable 'compare_with_sh' IS OPTIONNAL
@@ -21,9 +21,7 @@
 # as follows: "echo $shell_input | ./hsh"
 #
 # It can be empty and multiline
-shell_input="cd /tmp
-cd /dev
-cd -
+shell_input="cd
 /bin/pwd"
 
 ################################################################################
