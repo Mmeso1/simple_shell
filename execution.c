@@ -131,4 +131,3 @@ char **construct_args(char *command, char **args)
 	command_with_args[token_count + 1] = NULL;
 	return (command_with_args);
 }
-
