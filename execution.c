@@ -11,7 +11,7 @@
 int execute_command(char *full_path, char **args)
 {
 	pid_t child_pid;
-	int status;
+	int status, exit_status;
 	char *envp[] = {"TERM=xterm", NULL};
 	char **command_with_args = construct_args(full_path, args);
 
@@ -31,8 +31,9 @@ int execute_command(char *full_path, char **args)
 		}
 	}
 	wait(&status);
+	exit_status = WEXITSTATUS(status);
 	free(command_with_args);
-	return (status);
+	return (exit_status);
 }
 
 /**

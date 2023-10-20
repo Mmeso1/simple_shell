@@ -33,7 +33,6 @@ void handle_cmdline(char *input_line)
 			command = parse_command(token);
 			args = parse_arguments(token);
 			STATUS = execute_any_command(command, args);
-
 			if (args != NULL)
 				_free(args);
 			free(command);
